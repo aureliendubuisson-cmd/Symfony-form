@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class PartController extends AbstractController
 {
     #[Route('/parts', name: 'app_part_index')]
-    public function index(StarshipPartRepository $repository, Request $request,): Response
+    public function index(StarshipPartRepository $repository, Request $request): Response
     {
         $query = $request->query->getString('query');
 
