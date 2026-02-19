@@ -45,7 +45,7 @@ final class AppStory extends Story
         StarshipPartFactory::createMany(100);
 
         DroidFactory::createMany(100);
-        StarshipFactory::createMany(100, fn() => [
+        StarshipFactory::createMany(100, fn () => [
             'droids' => DroidFactory::randomRange(1, 5),
         ]);
     }

@@ -6,10 +6,8 @@ use App\Repository\StarshipPartRepository;
 use App\Repository\StarshipRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
-use Gedmo\Mapping\Annotation\Timestampable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: StarshipRepository::class)]
@@ -205,7 +203,7 @@ class Starship
         return $this->starshipDroids->map(fn (StarshipDroid $starshipDroid) => $starshipDroid->getDroid());
     }
 
-    public function addDroid(Droid $droid, \DateTimeImmutable $assignedAt = null): static
+    public function addDroid(Droid $droid, ?\DateTimeImmutable $assignedAt = null): static
     {
         if (!$this->getDroids()->contains($droid)) {
             $starshipDroid = new StarshipDroid();
@@ -229,7 +227,7 @@ class Starship
 
     public function getDroidNames(): string
     {
-        return implode(', ', $this->getDroids()->map(fn(Droid $droid) => $droid->getName())->toArray());
+        return implode(', ', $this->getDroids()->map(fn (Droid $droid) => $droid->getName())->toArray());
     }
 
     /**

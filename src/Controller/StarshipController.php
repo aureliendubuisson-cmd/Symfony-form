@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Starship;
-use App\Repository\StarshipPartRepository;
-use App\Repository\StarshipRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

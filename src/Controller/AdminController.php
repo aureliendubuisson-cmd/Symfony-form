@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\StarshipPart;
 use App\Form\StarshipPartType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,8 +11,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class AdminController extends AbstractController
 {
     #[Route('/starship-part/new', name: 'app_admin_starship_part_new', methods: ['GET', 'POST'])]
-    public function newStarshipPart(): Response {
+    public function newStarshipPart(): Response
+    {
         $form = $this->createForm(StarshipPartType::class);
+
         return $this->render('admin/starship-part/new.html.twig', ['form' => $form]);
     }
 }
