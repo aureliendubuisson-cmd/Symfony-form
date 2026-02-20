@@ -11,13 +11,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class StarshipPartType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', null, ['constraints' => [new NotBlank([], 'Le champ doit être rempli')]])
             ->add('price')
             ->add('notes')
             ->add('starship', EntityType::class, [
@@ -35,6 +36,7 @@ class StarshipPartType extends AbstractType
                 },
             ])
             ->add('createAndAddNew', SubmitType::class, [
+                'validate' => false,
                 'attr' => [
                     'class' => 'text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-5 py-2.5 me-2 mb-2 cursor-pointer',
                 ],
