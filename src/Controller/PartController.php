@@ -15,7 +15,13 @@ final class PartController extends AbstractController
     public function index(StarshipPartRepository $repository, Request $request): Response
     {
         $searchForm = $this->createForm(PartSearchType::class);
-        $query = $request->query->getString('query');
+        // $query = $request->query->getString('query');
+
+        $query = null;
+        $searchForm->handleRequest($request);
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $query = $searchForm->get('query')->getData();
+        }
 
         $parts = $repository->findAllOrderedByPrice($query);
 
