@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PartSearchType extends AbstractType
@@ -11,7 +13,7 @@ class PartSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('query', null, ['label' => false,  'attr' => [
+            ->add('query', SearchType::class, ['required' => false, 'label' => false,  'attr' => [
                 'placeholder' => 'Search...',
                 'class' => 'w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
             ], ])
@@ -21,7 +23,14 @@ class PartSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'method' => Request::METHOD_GET,
+            'csrf_protection' => false,
             // Configure your form options here
         ]);
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return '';
     }
 }
