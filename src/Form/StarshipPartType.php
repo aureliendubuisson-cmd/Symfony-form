@@ -19,7 +19,6 @@ class StarshipPartType extends AbstractType
         $builder
             ->add('name')
             ->add('price')
-            ->add('notes')
             ->add('starship', EntityType::class, [
                 'class' => Starship::class,
                 'choice_label' => function (Starship $starship) {
@@ -33,7 +32,9 @@ class StarshipPartType extends AbstractType
                     return $repo->createQueryBuilder('starship')
                         ->orderBy('starship.name', Order::Ascending->value);
                 },
+                'priority' => 10,
             ])
+            ->add('notes')
             ->add('createAndAddNew', SubmitType::class, [
                 'validate' => false,
                 'attr' => [
